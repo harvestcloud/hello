@@ -13,13 +13,11 @@ jobs:
     - uses: actions/checkout@v1
     - name: Build the Docker image
       run: |
-        DOCKER_IMAGE_VERSION=latest
-        DOCKER_IMAGE_TAG=${{ github.repository }}:$DOCKER_IMAGE_VERSION
-        docker build . --build-arg "VERSION=7.3" -f docker/php-fpm/Dockerfile --tag $DOCKER_IMAGE_TAG
-        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-        docker push $DOCKER_IMAGE_TAG
+        PHP_FPM_IMAGE_TAG=${{ github.repository }}:latest
+        docker build . --build-arg "VERSION=7.3" -f docker/php-fpm/Dockerfile --tag $PHP_FPM_IMAGE_TAG
 
-        DOCKER_IMAGE_TAG="harvestcloud/nginx:latest"
-        docker build . --build-arg "VERSION=1.15" --build-arg "PHP_FPM_HOSTNAME=localhost" -f docker/nginx/Dockerfile --tag $DOCKER_IMAGE_TAG
+        NGINX_IMAGE_TAG="harvestcloud/nginx:latest"
+        docker build . --build-arg "VERSION=1.15" --build-arg "PHP_FPM_HOSTNAME=localhost" -f docker/nginx/Dockerfile --tag $NGINX_IMAGE_TAG
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-        docker push $DOCKER_IMAGE_TAG
+        docker push $PHP_FPM_IMAGE_TAG
+        docker push $NGINX_IMAGE_TAG
