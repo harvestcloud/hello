@@ -6,12 +6,12 @@ on:
     - master
 
 jobs:
-  build_php_fpm:
-    name: Build and push php-fpm
+  build_and_push:
+    name: Build and push php-fpm and nginx images
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Build the Docker image
+    - name: Build and push
       run: |
         PHP_FPM_IMAGE_TAG=${{ github.repository }}:latest
         docker build . --build-arg "VERSION=7.3" -f docker/php-fpm/Dockerfile --tag $PHP_FPM_IMAGE_TAG
