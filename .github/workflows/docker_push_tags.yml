@@ -1,0 +1,23 @@
+name: Docker Build and Push
+
+on:
+  push:
+    tags:
+    - "*"
+
+jobs:
+  build_and_push:
+    name: Build and push php-fpm and nginx images
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build and push
+      run: |
+        PHP_FPM_IMAGE_TAG=${{ github.repository }}:`echo ${GITHUB_REF/refs\/tags\//} | cut -b 2-`
+        docker build . --build-arg "VERSION=7.3" -f docker/php-fpm/Dockerfile --tag $PHP_FPM_IMAGE_TAG
+
+        NGINX_IMAGE_TAG=harvestcloud/nginx:`echo ${GITHUB_REF/refs\/tags\//} | cut -b 2-`
+        docker build . --build-arg "VERSION=1.15" --build-arg "PHP_FPM_HOSTNAME=localhost" -f docker/nginx/Dockerfile --tag $NGINX_IMAGE_TAG
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        docker push $PHP_FPM_IMAGE_TAG
+        docker push $NGINX_IMAGE_TAG
