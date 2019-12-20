@@ -19,13 +19,6 @@ jobs:
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
         docker push $DOCKER_IMAGE_TAG
 
-  build_nginx:
-    name: Build and push nginx
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - name: Build the Docker image
-      run: |
         DOCKER_IMAGE_TAG="harvestcloud/nginx:latest"
         docker build . --build-arg "VERSION=1.15" --build-arg "PHP_FPM_HOSTNAME=localhost" -f docker/nginx/Dockerfile --tag $DOCKER_IMAGE_TAG
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
