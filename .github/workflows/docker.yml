@@ -6,8 +6,8 @@ on:
     - master
 
 jobs:
-  test:
-    name: Build and push
+  build_php_fpm:
+    name: Build and push php-fpm
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
@@ -16,5 +16,17 @@ jobs:
         DOCKER_IMAGE_VERSION=latest
         DOCKER_IMAGE_TAG=${{ github.repository }}:$DOCKER_IMAGE_VERSION
         docker build . --build-arg "VERSION=7.3" -f docker/php-fpm/Dockerfile --tag $DOCKER_IMAGE_TAG
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        docker push $DOCKER_IMAGE_TAG
+
+  build_nginx:
+    name: Build and push nginx
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build the Docker image
+      run: |
+        DOCKER_IMAGE_TAG=harvestcloud/nginx:latest
+        docker build . --build-arg "VERSION=1.15" --build-arg "PHP_FPM_HOSTNAME=localhost" -f docker/ngoinx/Dockerfile --tag $DOCKER_IMAGE_TAG
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
         docker push $DOCKER_IMAGE_TAG

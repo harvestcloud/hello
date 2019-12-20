@@ -5,6 +5,7 @@ services:
         build:
             args:
                 VERSION: $NGINX_VERSION
+                PHP_FPM_HOSTNAME: php-fpm
             context: .
             dockerfile: ./docker/nginx/Dockerfile
         depends_on:
