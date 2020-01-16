@@ -15,7 +15,7 @@ class DefaultController extends AbstractController
     {
         return $this->json([
             'message' => 'Hello, Harvest Cloud!',
-            'host' => $request->getHost(),
+            'host' => $_SERVER['HOSTNAME'],
         ]);
     }
 }
