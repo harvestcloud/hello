@@ -22,3 +22,13 @@ services:
         volumes:
             - ./server:/app
         command: sh -c 'composer install --no-interaction --optimize-autoloader && php-fpm'
+
+    react:
+        build:
+            context: ./client
+            dockerfile: ./docker/Dockerfile
+            target: build
+        volumes:
+            - ./client:/usr/src/app
+        ports:
+            - $CLIENT_REACT_PORT:3000
