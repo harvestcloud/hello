@@ -24,4 +24,4 @@ RUN wget https://getcomposer.org/installer && \
     php installer --install-dir=/usr/local/bin/ --filename=composer && \
     rm installer
 
-RUN composer install --no-interaction --optimize-autoloader
+RUN cd server && composer install --no-interaction --optimize-autoloader
