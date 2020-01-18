@@ -13,10 +13,5 @@ jobs:
     - uses: actions/checkout@v1
     - name: server-nginx
       run: |
-#       PHP_FPM_IMAGE_TAG=${{ github.repository }}:latest
-#       docker build . --build-arg "VERSION=7.3" -f docker/php-fpm/Dockerfile --tag $PHP_FPM_IMAGE_TAG
        NGINX_IMAGE_TAG="harvestcloud/hello-server-nginx:latest"
        docker build . --build-arg "VERSION=1.15" --build-arg "PHP_FPM_HOSTNAME=localhost" -f server/docker/nginx/Dockerfile --tag $NGINX_IMAGE_TAG
-#       docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-#       docker push $PHP_FPM_IMAGE_TAG
-#       docker push $NGINX_IMAGE_TAG
