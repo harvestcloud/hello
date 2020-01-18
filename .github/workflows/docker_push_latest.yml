@@ -30,6 +30,6 @@ jobs:
     - name: Build and push client-react
       run: |
         REACT_CLIENT_IMAGE_TAG="harvestcloud/hello-react-client:latest"
-        docker build . -f client/docker/react/Dockerfile --tag $REACT_CLIENT_IMAGE_TAG
+        docker build . -f client/docker/Dockerfile --tag $REACT_CLIENT_IMAGE_TAG
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
         docker push $REACT_CLIENT_IMAGE_TAG
