@@ -4,12 +4,10 @@ import WhatDoesTheServerSay from './components/WhatDoesTheServerSay';
 import Logo from './components/Logo';
 
 function App() {
-  let url = 'http://localhost:8050/';
-
   return (
     <div className="App">
       <Logo />
-      <WhatDoesTheServerSay url={url} />
+      <WhatDoesTheServerSay url={window._env_.CLIENT_SERVER_BASE_URL} />
     </div>
   );
 }
