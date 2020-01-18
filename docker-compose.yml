@@ -24,6 +24,8 @@ services:
         command: sh -c 'composer install --no-interaction --optimize-autoloader && php-fpm'
 
     react:
+        environment:
+            - CLIENT_SERVER_BASE_URL=http://localhost:8050
         build:
             context: ./client
             dockerfile: ./docker/Dockerfile
