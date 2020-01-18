@@ -1,38 +1,70 @@
-.App {
-  text-align: center;
+#root {
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+    color: #333;
+    padding: 40px;
+    font-family: "Source Sans Pro", sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.logo {
+    text-align: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.logo h1 {
+    font-size: 4em;
+    font-family: "Lakki Reddy", serif;
+    margin: 0;
+    line-height: 0.9;
+    color: #cb0001;
 }
 
-.App-link {
-  color: #61dafb;
+.logo h2 {
+    font-size: 1.5em;
+    font-family: "Josefin Sans", serif;
+    text-transform: uppercase;
+    margin: 0;
+    letter-spacing: 0.2em;
+    line-height: 0;
+    vertical-align: -1em;
+    color: #aaa;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+
+.what-does-the-server-say {
+    padding-top: 20px;
+}
+
+.what-does-the-server-say .message {
+    font-size: 2em;
+    padding-bottom: 0.7em;
+}
+
+.fox {
+    text-decoration: line-through;
+}
+
+.speech-bubble {
+    position: relative;
+    background: #ddd;
+    border-radius: .4em;
+    padding: 2em;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.speech-bubble:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-bottom-color: #ddd;
+    border-top: 0;
+    margin-left: -20px;
+    margin-top: -20px;
 }
