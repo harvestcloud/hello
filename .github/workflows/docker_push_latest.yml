@@ -27,9 +27,10 @@ jobs:
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
         docker push $SERVER_PHP_FPM_IMAGE_TAG
 
-    - name: Build and push client-react
+    - name: Build and push react-client
       run: |
+        cd client
         REACT_CLIENT_IMAGE_TAG="harvestcloud/hello-react-client:latest"
-        docker build . -f client/docker/Dockerfile --tag $REACT_CLIENT_IMAGE_TAG
+        docker build . -f docker/Dockerfile --tag $REACT_CLIENT_IMAGE_TAG
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
         docker push $REACT_CLIENT_IMAGE_TAG

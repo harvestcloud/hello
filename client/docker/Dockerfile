@@ -1,7 +1,7 @@
 # Build stage
 FROM node:8.17 AS build
 WORKDIR /usr/src/app
-COPY client/package.json yarn.lock ./
+COPY package.json yarn.lock ./
 RUN yarn
 COPY . ./
 RUN yarn build
