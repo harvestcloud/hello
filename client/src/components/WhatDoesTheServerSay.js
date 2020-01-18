@@ -13,10 +13,8 @@ class WhatDoesTheServerSay extends React.Component {
   }
 
   async componentDidMount() {
-    let url = 'http://localhost:8050/';
-
     try {
-      const resp = await axios.get(url);
+      const resp = await axios.get(this.props.url);
 
       this.setState({
         code: 'HTTP '+resp.status,
@@ -25,7 +23,7 @@ class WhatDoesTheServerSay extends React.Component {
       });
     } catch (error) {
       this.setState({
-        message: 'Could not connect to ' + url
+        message: 'Could not connect to ' + this.props.url
       });
     }
   }
