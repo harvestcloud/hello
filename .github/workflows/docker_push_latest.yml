@@ -15,15 +15,16 @@ jobs:
 
     - name: Build and push server-nginx
       run: |
+        cd server
         SERVER_NGINX_IMAGE_TAG="harvestcloud/hello-server-nginx:latest"
-        docker build . --build-arg "VERSION=1.15" --build-arg "PHP_FPM_HOSTNAME=localhost" -f server/docker/nginx/Dockerfile --tag $SERVER_NGINX_IMAGE_TAG
+        docker build . --build-arg "VERSION=1.15" --build-arg "PHP_FPM_HOSTNAME=localhost" -f docker/nginx/Dockerfile --tag $SERVER_NGINX_IMAGE_TAG
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
         docker push $SERVER_NGINX_IMAGE_TAG
 
     - name: Build and push server-php-fpm
       run: |
         SERVER_PHP_FPM_IMAGE_TAG="harvestcloud/hello-server-php-fpm:latest"
-        docker build . --build-arg "VERSION=7.3" -f server/docker/php-fpm/Dockerfile --tag $SERVER_PHP_FPM_IMAGE_TAG
+        docker build . --build-arg "VERSION=7.3" -f docker/php-fpm/Dockerfile --tag $SERVER_PHP_FPM_IMAGE_TAG
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
         docker push $SERVER_PHP_FPM_IMAGE_TAG
 
