@@ -23,6 +23,7 @@ jobs:
 
     - name: Build and push server-php-fpm
       run: |
+        cd server
         SERVER_PHP_FPM_IMAGE_TAG="harvestcloud/hello-server-php-fpm:latest"
         docker build . --build-arg "VERSION=7.3" -f docker/php-fpm/Dockerfile --tag $SERVER_PHP_FPM_IMAGE_TAG
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
