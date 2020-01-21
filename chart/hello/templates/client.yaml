@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-client
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: client
+  template:
+    metadata:
+      labels:
+        app: client
+    spec:
+      containers:
+      - name: hello-client
+        image: harvestcloud/hello-react-client
+        env:
+        - name: CLIENT_SERVER_BASE_URL
+          value: "http://api.hello.harvestcloud.local"

@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: hello-server-ingress
+spec:
+  rules:
+  - host: api.hello.harvestcloud.local
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: hello-server-service
+          servicePort: 80
+  - host: hello.harvestcloud.local
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: hello-client-service
+          servicePort: 80
